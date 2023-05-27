@@ -1,0 +1,11 @@
+{
+  "allowJs": true,
+  "skipLibCheck": true,
+  "extends": "./tsconfig.app.json",
+  "exclude": ["src/**/*.vue.js"],
+  "compilerOptions": {
+    "composite": true,
+    "lib": [],
+    "types": ["node", "jsdom"]
+  }
+}

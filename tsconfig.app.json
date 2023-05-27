@@ -1,0 +1,25 @@
+{
+  "allowJs": true,
+  "skipLibCheck": true,
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "src/**/*.vue"],
+  "exclude": ["src/**/__tests__/*", "src/**/*.vue.js"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "core/*": ["./src/core/*"],
+      "components": ["./src/components/index.ts"],
+      "components/*": ["./src/components/*"],
+      "layouts/*": ["./src/layouts/*"],
+      "store/*": ["./src/store/*"],
+      "store": ["./src/store/index"],
+      "modules/*": ["./src/modules/*"],
+      "router/*": ["./src/router/*"],
+      "router": ["./src/router/index"],
+      "utils/*": ["./src/utils/*"],
+      "mixins": ["./src/mixins/index.ts"],
+    }
+  }
+}
