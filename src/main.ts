@@ -10,6 +10,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './index.css';
 import router from './router';
+import setupInterceptors from './services/setupInterceptors';
 
 // create new app instance
 const createNewApp = () => {
@@ -24,7 +25,7 @@ const createNewApp = () => {
   app.use(ElementPlus);
   app.use(AppComponents);
   app.use(createPinia());
-
+  setupInterceptors();
   app.mount('#app');
   app.config.performance = true;
 };

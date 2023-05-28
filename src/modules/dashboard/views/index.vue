@@ -31,7 +31,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import AnalysisCard from 'modules/cards/views/components/AnalysisCard.vue';
+import AnalysisCard from './components/AnalysisCard.vue';
 // Chart
 import GradientLineChart from './components/GradientLineChart.vue';
 import TotalBarChart from './components/TotalBarChart.vue';

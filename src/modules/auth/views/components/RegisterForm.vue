@@ -18,7 +18,7 @@
         <div class="text-muted text-center mb-5">
           <small>Or sign up with credentials </small>
         </div>
-        <el-form ref="form" :model="formData" class="authentication-form pb-6">
+        <el-form ref="formRef" :model="formData" :rules="rules" class="authentication-form pb-6">
           <el-form-item class="mb-6 rounded-md" prop="email">
             <div
               class="authentication-form-icon z-10 absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none"
@@ -28,29 +28,6 @@
               </div>
             </div>
             <el-input type="email" placeholder="Email" v-model="formData.email" />
-          </el-form-item>
-          <el-form-item class="mb-6 rounded-md" prop="type">
-            <div
-              class="authentication-form-icon z-10 absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none"
-            >
-              <div class="w-5 h-5">
-                <IdentificationIcon class="w-5 h-5 text-gray-210" />
-              </div>
-            </div>
-            <el-select
-              v-model="formData.usrType"
-              placeholder="User Type"
-              class="w-full"
-              popper-class="item-input-popper"
-            >
-              <el-option
-                v-for="item in userType"
-                :key="item.id"
-                :label="item.nameType"
-                :value="item.id"
-              >
-              </el-option>
-            </el-select>
           </el-form-item>
           <el-form-item class="mb-6 rounded-md" prop="password">
             <div
@@ -62,7 +39,7 @@
             </div>
             <el-input type="password" placeholder="Password" v-model="formData.password" />
           </el-form-item>
-          <el-form-item class="mb-6 rounded-md" prop="password">
+          <el-form-item class="mb-6 rounded-md" prop="checkPass">
             <div
               class="authentication-form-icon z-10 absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none"
             >
@@ -70,7 +47,7 @@
                 <LockOpenIcon class="w-5 h-5 text-gray-210" />
               </div>
             </div>
-            <el-input type="password" placeholder="Confirm Password" v-model="formData.password" />
+            <el-input type="password" placeholder="Confirm Password" v-model="formData.checkPass" />
           </el-form-item>
           <el-form-item class="mb-6 rounded-md">
             <div class="italic">
@@ -82,52 +59,101 @@
           <el-form-item class="mb-6">
             <el-checkbox class="w-4 h-4 text-muted font-normal"
               >I agree with the
-              <a href="#!" class="text-indigo-410 hover:text-indigo-410-active">Privacy Policy</a>
+              <a href="/404" class="text-indigo-410 hover:text-indigo-410-active">Privacy Policy</a>
             </el-checkbox>
           </el-form-item>
         </el-form>
-        <el-button type="primary"> Create account </el-button>
+        <el-button type="primary" @click="submitForm(formRef)"> Create account </el-button>
       </div>
     </el-card>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { MailIcon, IdentificationIcon, LockOpenIcon } from '@heroicons/vue/solid';
-
+import { defineComponent, reactive, ref } from 'vue';
+import { MailIcon, LockOpenIcon } from '@heroicons/vue/solid';
+import { ElNotification, FormInstance, FormRules } from 'element-plus';
+import useStore from 'store';
 export default defineComponent({
   name: 'RegisterForm',
   components: {
     MailIcon,
-    IdentificationIcon,
     LockOpenIcon
   },
   setup() {
-    const form = ref<any>();
-    const formData = ref({
+    const formRef = ref<FormInstance>();
+    const formData = reactive({
       email: '',
-      usrType: '',
-      password: ''
+      password: '',
+      checkPass: ''
     });
-
-    const userType = [
-      {
-        id: 1,
-        nameType: 'Admin'
-      },
-      {
-        id: 2,
-        nameType: 'Creator'
-      },
-      {
-        id: 3,
-        nameType: 'Member'
+    const validatePass = (rule: any, value: any, callback: any) => {
+      if (value === '') {
+        callback(new Error('Please input the password'));
+      } else {
+        if (formData.checkPass !== '') {
+          if (!formRef.value) return;
+          formRef.value.validateField('checkPass', () => null);
+        }
+        callback();
       }
-    ];
+    };
+    const validateCheckPass = (rule: any, value: any, callback: any) => {
+      if (value === '') {
+        callback(new Error('Please input the password again'));
+      } else if (value !== formData.password) {
+        callback(new Error("Two inputs don't match!"));
+      } else {
+        callback();
+      }
+    };
+
+    const rules = reactive<FormRules>({
+      email: [
+        {
+          required: true,
+          message: 'Email can not be null!',
+          trigger: 'blur'
+        },
+        {
+          type: 'email',
+          message: 'Invalid email!',
+          trigger: 'blur'
+        }
+      ],
+      password: [{ validator: validatePass, trigger: 'blur' }],
+      checkPass: [{ validator: validateCheckPass, trigger: 'blur' }]
+    });
+    const store = useStore();
+    const submitForm = (formEl: FormInstance | undefined) => {
+      if (!formEl) return;
+      formEl.validate((valid) => {
+        if (valid) {
+          const user = store.auth.actRegister({
+            email: formData.email,
+            password: formData.password
+          });
+          if (user) {
+            ElNotification({
+              title: 'Success',
+              message: 'Register success',
+              type: 'success'
+            });
+          }
+        } else {
+          ElNotification({
+            title: 'Error',
+            message: 'Register fail',
+            type: 'error'
+          });
+          return false;
+        }
+      });
+    };
     return {
-      userType,
-      form,
-      formData
+      formRef,
+      formData,
+      rules,
+      submitForm
     };
   }
 });

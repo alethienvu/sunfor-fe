@@ -77,7 +77,7 @@ import PrimaryIndicator from './components/PrimaryIndicator.vue';
 import WarningIndicator from './components/WarningIndicator.vue';
 import EditProfileForm from './components/EditProfileForm.vue';
 import ProgressTrack from './components/ProgressTrack.vue';
-import ProfileCard from '../../cards/views/components/ProfileCard.vue';
+import ProfileCard from './components/ProfileCard.vue';
 
 import backGround from '@/assets/images/profile-cover.jpg';
 import avatarUrl from '@/assets/images/team-3.jpg';

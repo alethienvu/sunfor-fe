@@ -51,6 +51,7 @@ import { defineComponent, ref } from 'vue';
 import useStore from 'store';
 import { MailIcon, LockOpenIcon } from '@heroicons/vue/solid';
 import { ElNotification } from 'element-plus';
+import router from 'router/index';
 export default defineComponent({
   name: 'LoginForm',
   components: {
@@ -58,9 +59,6 @@ export default defineComponent({
     LockOpenIcon
   },
   props: {
-    height: {
-      type: Number
-    },
     description: {
       type: String,
       default: ''
@@ -95,7 +93,12 @@ export default defineComponent({
     const login = async () => {
       try {
         if (!store.auth.isAuthenticated) {
-          store.auth.actLogin(formData.value);
+          const user = await store.auth.actLogin(formData.value);
+          if (user) {
+            setTimeout(() => {
+              router.push({ name: 'Dashboard' });
+            }, 1000);
+          }
         }
       } catch (e) {
         console.log('err::: ', e);

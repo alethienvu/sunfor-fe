@@ -23,9 +23,6 @@
               </el-dropdown-item>
               <el-dropdown-item divided>
                 <div class="flex flex-col items-start gap-y-4 pt-4.5 pb-9">
-                  <router-link to="/" class="ml-1 py-px text-default text-sm font-medium">
-                    Dashboard
-                  </router-link>
                   <router-link to="/login" class="ml-1 py-px text-default text-sm font-medium">
                     Login
                   </router-link>
@@ -64,14 +61,6 @@
     </div>
     <div class="hidden basis-auto lg:flex items-center w-full">
       <div class="flex flex-row mr-auto items-center gap-11 md:h-10 lg:h-14">
-        <div>
-          <router-link
-            to="/"
-            class="text-secondary text-sm hover:text-secondary-active font-normal"
-          >
-            Dashboard
-          </router-link>
-        </div>
         <div>
           <router-link
             to="/login"

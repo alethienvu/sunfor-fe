@@ -101,6 +101,15 @@ body {
         }
       }
     }
+    .el-form-item.el-form-item--default.is-error {
+      .el-input .el-input__inner {
+        @apply border-red-400 focus:font-normal text-red-400 ring-red-400 ring-2  #{!important};
+      }
+      .el-form-item__error {
+        @apply mt-1;
+      }
+    }
+
     .el-checkbox {
       .el-checkbox__input {
         @apply shadow-lg;

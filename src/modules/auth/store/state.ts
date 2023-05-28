@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 import { type AuthState } from './types';
-import { AUTH_TOKEN } from 'core/constants';
+import tokenService from '../../../services/token.service';
 
 export const useState = defineStore({
   id: 'auth.state',
   state: (): AuthState => {
     return {
-      isAuthenticated: !!localStorage.getItem(AUTH_TOKEN)
+      user: tokenService.getUser(),
+      isAuthenticated: Object.keys(tokenService.getUser()).length !== 0 ? true : false
     };
   }
 });
