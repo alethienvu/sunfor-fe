@@ -11,7 +11,7 @@ import {
 import { AlertType } from '../../types/alert';
 export default defineComponent({
   name: 'Alert',
-  components: { WarningFilled },
+  components: { WarningFilled, InfoFilled, SuccessFilled, WarnTriangleFilled },
   setup() {
     const store = useGlobalStore();
     const { alert } = storeToRefs(store);
