@@ -18,10 +18,25 @@
       <SplitBackground />
     </div>
     <div
-      class="container relative xl:max-w-5.75xl lg:max-w-4.5xl md:max-w-2.625xl sm:max-w-0.25xl w-full mx-auto px-4"
+      class="container relative xl:max-w-5.75xl lg:max-w-4.5xl md:max-w-2.625xl sm:max-w-0.25xl w-full mx-auto px-3.75 pb-12"
     >
-      <div class="relative lg:max-w-1/2 md:max-w-2/3 mx-auto md:px-1.5 -mt-32 mb-20">
-        <RegisterForm />
+      <div class="relative lg:max-w-5/12 md:max-w-7/12 w-full mx-auto md:px-2 -mt-32">
+        <LoginForm />
+        <div class="flex pt-8">
+          <div class="text-sm text-left">
+            <router-link
+              to="/forgot-password"
+              class="text-light text-90 font-normal hover:text-[#b1bbc4]"
+            >
+              Forgot password?
+            </router-link>
+          </div>
+          <div class="text-sm ml-auto">
+            <router-link to="/register" class="text-light text-90 font-normal hover:text-[#b1bbc4]">
+              Create new account?
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -29,14 +44,14 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import useStore from 'store';
-import RegisterForm from './components/RegisterForm.vue';
 import SplitBackground from './components/SplitBackground.vue';
+import LoginForm from './components/LoginForm.vue';
 import WelcomeLabel from './components/WelcomeLabel.vue';
 
 export default defineComponent({
   components: {
-    RegisterForm,
     SplitBackground,
+    LoginForm,
     WelcomeLabel
   },
   setup() {

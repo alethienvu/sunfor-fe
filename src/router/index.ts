@@ -10,7 +10,7 @@ router.beforeEach((to, from, next) => {
   const store = useStore();
   store.dashboard.setIsSBOpen(false);
   const { isAuthenticated } = store.auth;
-  const publicPath = ['/login', '/register'];
+  const publicPath = ['/login', '/register', '/forgot-password', '/404'];
   const isAccessPublicPath = publicPath.includes(to.fullPath);
   if (!isAccessPublicPath && !isAuthenticated) {
     next({ name: from.name || 'login' });

@@ -41,3 +41,6 @@ export interface IRegisterDto {
   email: string;
   password: string;
 }
+export interface IForgotPassDto {
+  email: string;
+}

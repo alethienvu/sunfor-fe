@@ -1,8 +1,6 @@
 <template>
-  <el-scrollbar
-    class="relative w-full bg-default overflow-y-auto h-screen"
-    v-loading.fullscreen.lock="loading"
-  >
+  <el-scrollbar class="relative w-full bg-default overflow-y-auto h-screen">
+    <Loading v-if="loading" />
     <div class="relative">
       <div class="absolute w-full z-100 p-4 bg-transparent border-0">
         <AuthNavigation />

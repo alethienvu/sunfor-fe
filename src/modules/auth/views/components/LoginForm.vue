@@ -20,8 +20,15 @@
         <div class="mb-4 mt-2 text-center">
           <small class="block w-full text-12.8 mb-6 text-muted">{{ description }}</small>
         </div>
-        <el-form ref="form" :model="formData" class="authentication-form">
-          <el-form-item class="warning-input mb-4 rounded-md" prop="email">
+        <el-form ref="formRef" :model="formData" class="authentication-form" @keyup.enter="login">
+          <el-form-item
+            class="warning-input mb-6 rounded-md"
+            prop="email"
+            :rules="[
+              { required: true, message: 'Email is required', trigger: 'blur' },
+              { type: 'email', message: 'Invalid email', trigger: 'blur' }
+            ]"
+          >
             <div class="z-10 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <div class="w-5 h-5">
                 <MailIcon class="w-5 h-5 text-gray-210" />
@@ -29,7 +36,11 @@
             </div>
             <el-input placeholder="Email" v-model="formData.email" />
           </el-form-item>
-          <el-form-item class="mb-6 rounded-md" prop="password">
+          <el-form-item
+            class="mb-6 rounded-md"
+            prop="password"
+            :rules="[{ required: true, message: 'Password is required', trigger: 'blur' }]"
+          >
             <div class="z-10 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <div class="w-5 h-5">
                 <LockOpenIcon class="w-5 h-5 text-gray-210" />
@@ -41,7 +52,7 @@
             <el-checkbox class="text-muted font-normal">Remember me</el-checkbox>
           </el-form-item>
         </el-form>
-        <el-button type="primary" @click="handleLoginClick"> Sign in </el-button>
+        <el-button type="primary" @click="login"> Sign in </el-button>
       </div>
     </el-card>
   </div>
@@ -51,6 +62,7 @@ import { defineComponent, ref } from 'vue';
 import useStore from 'store';
 import { MailIcon, LockOpenIcon } from '@heroicons/vue/solid';
 import { ElNotification } from 'element-plus';
+import type { FormInstance } from 'element-plus';
 import router from 'router/index';
 export default defineComponent({
   name: 'LoginForm',
@@ -62,53 +74,33 @@ export default defineComponent({
     description: {
       type: String,
       default: ''
-    },
-    email: {
-      type: String,
-      default: ''
-    },
-    password: {
-      type: String,
-      default: ''
     }
   },
-  setup(props) {
+  setup() {
     const store = useStore();
-    const form = ref<any>();
-    const formData = ref({ email: props.email, password: props.password });
-
-    const handleKeyDown = async () => {
-      login();
-    };
-
-    const handleLoginClick = async () => {
-      login();
-      ElNotification({
-        title: 'Success',
-        message: 'This is a success message',
-        type: 'success'
-      });
-    };
-
+    const formRef = ref<FormInstance>();
+    const formData = ref({ email: '', password: '' });
     const login = async () => {
-      try {
-        if (!store.auth.isAuthenticated) {
-          const user = await store.auth.actLogin(formData.value);
-          if (user) {
-            setTimeout(() => {
-              router.push({ name: 'Dashboard' });
-            }, 1000);
-          }
+      if (!store.auth.isAuthenticated) {
+        store.global.actLoading(true);
+        const user = await store.auth.actLogin(formData.value);
+        if (user) {
+          ElNotification({
+            title: 'Success',
+            message: 'You are signed in!',
+            type: 'success'
+          });
+          setTimeout(() => {
+            store.global.actLoading(false);
+            router.push({ name: 'Dashboard' });
+          }, 1000);
         }
-      } catch (e) {
-        console.log('err::: ', e);
       }
     };
     return {
-      form,
+      formRef,
       formData,
-      handleLoginClick,
-      handleKeyDown
+      login
     };
   }
 });

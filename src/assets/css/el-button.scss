@@ -128,6 +128,17 @@ body {
     }
   }
 
+  .el-button.el-button--primary.is-disabled {
+    @apply bg-indigo-200 border border-indigo-200 text-white #{!important};
+
+    &:active {
+      @apply shadow-none #{!important};
+    }
+    &:hover {
+      @apply shadow-none #{!important};
+    }
+  }
+
   .el-button.el-button--info {
     @apply bg-info border border-info text-white #{!important};
 

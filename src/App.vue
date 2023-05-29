@@ -1,5 +1,6 @@
 <template>
   <el-config-provider :zIndex="9999">
+    <Alert />
     <AuthLayout v-if="isAuthLayout" />
     <DefaultLayout v-else />
   </el-config-provider>
@@ -9,13 +10,15 @@
 import { defineComponent, computed } from 'vue';
 import DefaultLayout from 'layouts/default-layout.vue';
 import AuthLayout from 'layouts/auth-layout.vue';
+import Alert from 'components/Alert/index.vue';
 import { useRoute } from 'vue-router';
 import { ElConfigProvider } from 'element-plus';
 export default defineComponent({
   components: {
     DefaultLayout,
     AuthLayout,
-    ElConfigProvider
+    ElConfigProvider,
+    Alert
   },
   inheritAttrs: false,
 

@@ -1,6 +1,7 @@
+import { AlertType } from '../types/alert';
 import axiosInstance from './api';
 import TokenService from './token.service';
-import useStore from 'store';
+import useStore, { useGlobalStore } from 'store';
 const setup = () => {
   axiosInstance.interceptors.request.use(
     (config) => {
@@ -21,8 +22,11 @@ const setup = () => {
       return res;
     },
     async (err) => {
+      console.log('🚀🚀🚀 ~ file: setupInterceptors.ts:24 ~ err:', err.response);
+      const globalStore = useGlobalStore();
+      globalStore.actLoading(false);
+      globalStore.actAlert({ type: AlertType.error, message: err.response.data.message });
       const originalConfig = err.config;
-      //TODO: Add alert here...
       if (originalConfig.url !== '/auth/login' && err.response) {
         // Access Token was expired
         if (err.response.status === 401 && !originalConfig._retry) {

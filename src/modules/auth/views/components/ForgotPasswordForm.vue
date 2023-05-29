@@ -5,7 +5,12 @@
         <div class="text-muted text-center -mt-0.5 mb-6">
           <small> Reset password </small>
         </div>
-        <el-form ref="form" :model="formData" class="authentication-form pb-6">
+        <el-form
+          ref="form"
+          :model="formData"
+          class="authentication-form pb-6"
+          @keyup.enter="forgotPass"
+        >
           <el-form-item class="mb-4 rounded-md" prop="email">
             <div
               class="authentication-form-icon z-10 absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none"
@@ -17,7 +22,7 @@
             <el-input type="email" placeholder="Email" v-model="formData.email" />
           </el-form-item>
         </el-form>
-        <el-button type="primary"> Send Password Reset Link </el-button>
+        <el-button type="primary" @click="forgotPass"> Send Password Reset Link </el-button>
       </div>
     </el-card>
   </div>
@@ -25,7 +30,8 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { MailIcon } from '@heroicons/vue/solid';
-
+import AuthService from '../../../../services/auth.service';
+import { ElNotification } from 'element-plus';
 export default defineComponent({
   name: 'ForgotPasswordForm',
   components: {
@@ -34,9 +40,20 @@ export default defineComponent({
   setup() {
     const form = ref<any>();
     const formData = ref({ email: '' });
+    const forgotPass = async () => {
+      const newPass = await AuthService.forgotPass(formData.value);
+      if (newPass) {
+        ElNotification({
+          title: 'Success',
+          message: `Email has been sent successfully to ${formData.value.email}`,
+          type: 'success'
+        });
+      }
+    };
     return {
       form,
-      formData
+      formData,
+      forgotPass
     };
   }
 });

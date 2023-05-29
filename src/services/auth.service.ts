@@ -1,4 +1,4 @@
-import { ILoginDto, IRegisterDto } from 'src/types/user';
+import { IForgotPassDto, ILoginDto, IRegisterDto } from 'src/types/user';
 import api from './api';
 import TokenService from './token.service';
 
@@ -25,7 +25,20 @@ class AuthService {
       .then((response) => {
         return response.data;
       })
-      .catch((_e) => {});
+      .catch((_e) => {
+        console.log(_e);
+      });
+  }
+
+  forgotPass(forgotPassDto: IForgotPassDto) {
+    return api
+      .put('/user/forgot-password', forgotPassDto)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((_e) => {
+        console.log(_e);
+      });
   }
 }
 

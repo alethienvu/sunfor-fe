@@ -1,7 +1,7 @@
 const Profile = () => import('modules/profile/views/index.vue');
-const Login = () => import('modules/auth/views/login.vue');
-const Register = () => import('modules/auth/views/register.vue');
-const ForgotPassword = () => import('modules/auth/views/forgot-password.vue');
+const Login = () => import('modules/auth/views/Login.vue');
+const Register = () => import('modules/auth/views/Register.vue');
+const ForgotPassword = () => import('modules/auth/views/ForgotPassword.vue');
 import { UserIcon } from '@heroicons/vue/outline';
 export default [
   {

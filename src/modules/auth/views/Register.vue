@@ -18,24 +18,14 @@
       <SplitBackground />
     </div>
     <div
-      class="container relative xl:max-w-5.75xl lg:max-w-4.5xl md:max-w-2.625xl sm:max-w-0.25xl w-full mx-auto px-3.75 pb-12"
+      class="container relative xl:max-w-5.75xl lg:max-w-4.5xl md:max-w-2.625xl sm:max-w-0.25xl w-full mx-auto px-4"
     >
-      <div class="relative lg:max-w-5/12 md:max-w-7/12 w-full mx-auto md:px-2 -mt-32">
-        <LoginForm :email="'admin@gmail.com'" />
-        <div class="flex pt-8">
-          <div class="text-sm text-left">
-            <router-link
-              to="/forgot-password"
-              class="text-light text-90 font-normal hover:text-[#b1bbc4]"
-            >
-              Forgot password?
-            </router-link>
-          </div>
-          <div class="text-sm ml-auto">
-            <router-link to="/register" class="text-light text-90 font-normal hover:text-[#b1bbc4]">
-              Create new account
-            </router-link>
-          </div>
+      <div class="relative lg:max-w-1/2 md:max-w-2/3 mx-auto md:px-1.5 -mt-32 mb-20">
+        <RegisterForm />
+        <div class="text-sm ml-auto pt-8">
+          <router-link to="/login" class="text-light text-90 font-normal hover:text-[#b1bbc4]">
+            Already have an account?
+          </router-link>
         </div>
       </div>
     </div>
@@ -44,23 +34,21 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import useStore from 'store';
+import RegisterForm from './components/RegisterForm.vue';
 import SplitBackground from './components/SplitBackground.vue';
-import LoginForm from './components/LoginForm.vue';
 import WelcomeLabel from './components/WelcomeLabel.vue';
 
 export default defineComponent({
   components: {
+    RegisterForm,
     SplitBackground,
-    LoginForm,
     WelcomeLabel
   },
   setup() {
     const store = useStore();
     const isAuthenticated = computed<boolean>(() => store.auth.getAuthenticationState);
-    const accounts: string[] = ['admin@argon.com', 'creator@argon.com', 'member@argon.com'];
     return {
-      isAuthenticated,
-      accounts
+      isAuthenticated
     };
   }
 });

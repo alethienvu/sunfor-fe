@@ -1,12 +1,6 @@
 <template>
-  <div
-    class="h-screen overflow-hidden flex bg-slate-20 w-full"
-    v-loading.fullscreen.lock="loading"
-    element-loading-text="Loading..."
-    :element-loading-spinner="svg"
-    element-loading-svg-view-box="-10, -10, 50, 50"
-    element-loading-background="rgba(122, 122, 122, 0.8)"
-  >
+  <div class="h-screen overflow-hidden flex bg-slate-20 w-full">
+    <Loading v-if="loading" />
     <sidebar />
     <div
       class="main-content flex flex-col flex-1 w-full overflow-auto"
@@ -68,16 +62,7 @@ import { defineComponent, computed } from 'vue';
 import useStore from 'store';
 import { HomeFilled } from '@element-plus/icons-vue';
 import { useRoute } from 'vue-router';
-const svg = `
-        <path class="path" d="
-          M 30 15
-          L 28 17
-          M 25.61 25.61
-          A 15 15, 0, 0, 1, 15 30
-          A 15 15, 0, 1, 1, 27.99 7.5
-          L 15 15
-        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
-      `;
+
 export default defineComponent({
   name: 'Layout',
   components: {
@@ -96,8 +81,7 @@ export default defineComponent({
       loading,
       setIsSBPin,
       route,
-      store,
-      svg
+      store
     };
   },
   beforeMount() {
