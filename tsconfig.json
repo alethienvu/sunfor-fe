@@ -15,8 +15,8 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "node"],
-    "typeRoots": ["../node_modules/@types", "node_modules/@types"],
+    "types": ["vite/client", "node", "element-plus/global"],
+    "typeRoots": ["./node_modules/@types", "node_modules/@types","node_modules/@element-plus/dist/types"],
     "baseUrl": ".",
     "paths": {
       "core/*": ["src/core/*"],
@@ -29,7 +29,7 @@
       "router/*": ["src/router/*"],
       "router": ["src/router/index"],
       "utils/*": ["src/utils/*"],
-      "mixins": ["src/mixins/index.ts"],
+      "types": ["src/types/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

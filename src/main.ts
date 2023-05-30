@@ -9,6 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import './index.css';
+import 'element-plus/dist/index.css';
 import router from './router';
 import setupInterceptors from './services/setupInterceptors';
 

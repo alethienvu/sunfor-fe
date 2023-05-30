@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ILoginDto, IRegisterDto } from 'src/types/user';
+import type { ILoginDto, IRegisterDto } from 'src/types/user';
 import AuthService from '../../../services/auth.service';
 import tokenService from '../../../services/token.service';
 import { useState } from './state';

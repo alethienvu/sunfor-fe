@@ -1,4 +1,4 @@
-import { IForgotPassDto, ILoginDto, IRegisterDto } from 'src/types/user';
+import type { IForgotPassDto, ILoginDto, IRegisterDto } from 'src/types/user';
 import api from './api';
 import TokenService from './token.service';
 

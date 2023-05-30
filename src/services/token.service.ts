@@ -1,5 +1,5 @@
-import { LOGIN_DATA_KEY } from '../core/constants';
-import { readLocal, saveLocal, removeLocal } from '../utils/localStorage';
+import { LOGIN_DATA_KEY } from 'core/constants';
+import { readLocal, saveLocal, removeLocal } from 'utils/localStorage';
 
 class TokenService {
   getLocalRefreshToken() {

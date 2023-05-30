@@ -1,25 +1,17 @@
+import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { defineConfig } from 'vite'
 const { visualizer } = require('rollup-plugin-visualizer')
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 const resolvePath = (dir: string) => {
   return path.resolve(__dirname, 'src', dir)
 }
 
 export default defineConfig({
-  base: './',
+  base: '/sunfor-fe/',
   plugins: [
     vue(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
-    }),
   ],
   resolve: {
     alias: {
@@ -33,7 +25,7 @@ export default defineConfig({
       utils: resolvePath('utils'),
       services: resolvePath('services'),
       types: resolvePath('types'),
-      '@': path.resolve(__dirname, './src'),
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
   build: {
@@ -43,6 +35,9 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes('element-plus')) {
             return 'elm'
+          }
+          if (id.includes('src')) {
+            return 'src'
           }
           if (id.includes('lodash')) {
             return 'lodash'

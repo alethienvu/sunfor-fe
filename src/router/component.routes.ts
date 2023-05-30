@@ -3,7 +3,7 @@ const Tables = () => import('modules/table/views/index.vue');
 import { ViewBoardsIcon, ColorSwatchIcon } from '@heroicons/vue/outline';
 
 export default {
-  path: '/components/:componentItem?',
+  path: '/components',
   component: ComponentLayout,
   name: 'Components',
   meta: {

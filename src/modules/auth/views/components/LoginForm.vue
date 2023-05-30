@@ -63,7 +63,7 @@ import useStore from 'store';
 import { MailIcon, LockOpenIcon } from '@heroicons/vue/solid';
 import { ElNotification } from 'element-plus';
 import type { FormInstance } from 'element-plus';
-import router from 'router/index';
+import router from 'router';
 export default defineComponent({
   name: 'LoginForm',
   components: {

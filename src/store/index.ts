@@ -1,7 +1,7 @@
 import { useDashboardStore } from 'modules/dashboard/store';
 import { useAuthStore } from 'modules/auth/store';
 import { defineStore } from 'pinia';
-import { IAlert } from '../types/alert';
+import type { IAlert } from '../types/alert';
 export const useGlobalStore = defineStore('global', {
   state: () => ({
     loading: false,
