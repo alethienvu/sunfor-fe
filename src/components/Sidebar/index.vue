@@ -220,7 +220,7 @@ export default defineComponent({
     const isSideMenuOpen = ref(false);
     const target = ref(null);
     const version = ref(env('VITE_APP_VERSION'));
-    const documentHref = ref(env('VITE_DOCUMENT_ENDPOINT')).toString();
+    const documentHref = ref(env<string>('VITE_DOCUMENT_ENDPOINT'));
     const isMobile = checkIsMobile();
     const leftSideBarItems = ref<any[]>(['Dashboard', 'Profile', 'Map']);
 

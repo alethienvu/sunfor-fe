@@ -1,18 +1,19 @@
-import { fileURLToPath, URL } from 'node:url'
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
-import { defineConfig } from 'vite'
-const { visualizer } = require('rollup-plugin-visualizer')
+import { fileURLToPath, URL } from 'node:url';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+import { defineConfig } from 'vite';
+import packageJson from './package.json';
+const { visualizer } = require('rollup-plugin-visualizer');
 
 const resolvePath = (dir: string) => {
-  return path.resolve(__dirname, 'src', dir)
-}
+  return path.resolve(__dirname, 'src', dir);
+};
 
 export default defineConfig({
-  base: '/sunfor-fe/',
-  plugins: [
-    vue(),
-  ],
+  // This base to deploy githubPage only 
+  // (https://vitejs.dev/guide/static-deploy.html#github-pages)
+  base: `/${packageJson.name}/`,
+  plugins: [vue()],
   resolve: {
     alias: {
       assets: resolvePath('assets'),
@@ -26,7 +27,7 @@ export default defineConfig({
       services: resolvePath('services'),
       types: resolvePath('types'),
       '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
+    }
   },
   build: {
     rollupOptions: {
@@ -34,21 +35,20 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('element-plus')) {
-            return 'elm'
+            return 'elm';
           }
           if (id.includes('src')) {
-            return 'src'
+            return 'src';
           }
           if (id.includes('lodash')) {
-            return 'lodash'
+            return 'lodash';
           }
           if (id.includes('node_modules')) {
-            return 'vendor'
+            return 'vendor';
           }
-        },
-      },
-    },
-    sourcemap: true,
+        }
+      }
+    }
   },
-  optimizeDeps: {},
-})
+  optimizeDeps: {}
+});

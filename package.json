@@ -1,6 +1,6 @@
 {
-  "name": "sunfor",
-  "version": "0.1.0",
+  "name": "sunfor-fe",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "vite",

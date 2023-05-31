@@ -12,7 +12,7 @@ import './index.css';
 import 'element-plus/dist/index.css';
 import router from './router';
 import setupInterceptors from './services/setupInterceptors';
-
+import './registerServiceWorker';
 // create new app instance
 const createNewApp = () => {
   const app = createApp({
