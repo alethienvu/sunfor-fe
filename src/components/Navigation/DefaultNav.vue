@@ -86,9 +86,7 @@
                   </el-dropdown-item>
                   <el-dropdown-item divided class="m-0">
                     <div class="flex items-center w-full py-2">
-                      <a
-                        href="#!"
-                        class="mx-auto text-center text-primary font-semibold text-medium"
+                      <a class="mx-auto text-center text-primary font-semibold text-medium"
                         >View all</a
                       >
                     </div>
@@ -120,10 +118,7 @@
               </template>
               <div class="w-full m-0">
                 <div class="flex flex-wrap w-full m-0">
-                  <a
-                    href="#!"
-                    class="flex flex-col w-2/6 py-3 text-center items-center content-center"
-                  >
+                  <a class="flex flex-col w-2/6 py-3 text-center items-center content-center">
                     <div class="flex h-13 w-14 content-center items-center text-center">
                       <div class="mx-auto">
                         <font-awesome-icon
@@ -136,10 +131,7 @@
                     <span class="text-0.8125 text-white font-semibold mt-2.5">Calendar</span>
                   </a>
 
-                  <a
-                    href="#!"
-                    class="flex flex-col w-2/6 py-3 text-center items-center content-center"
-                  >
+                  <a class="flex flex-col w-2/6 py-3 text-center items-center content-center">
                     <div class="flex h-13 w-14 content-center items-center text-center">
                       <div class="mx-auto">
                         <font-awesome-icon
@@ -152,10 +144,7 @@
                     <span class="text-0.8125 text-white font-semibold mt-2.5">Email</span>
                   </a>
 
-                  <a
-                    href="#!"
-                    class="flex flex-col w-2/6 py-3 text-center items-center content-center"
-                  >
+                  <a class="flex flex-col w-2/6 py-3 text-center items-center content-center">
                     <div class="flex h-13 w-14 content-center items-center text-center">
                       <div class="mx-auto">
                         <font-awesome-icon
@@ -168,10 +157,7 @@
                     <span class="text-0.8125 text-white font-semibold mt-2.5">Payments</span>
                   </a>
 
-                  <a
-                    href="#!"
-                    class="flex flex-col w-2/6 py-3 text-center items-center content-center"
-                  >
+                  <a class="flex flex-col w-2/6 py-3 text-center items-center content-center">
                     <div class="flex text-center items-center content-center h-13 w-13">
                       <div
                         class="transition-all duration-150 hover:h-13 hover:w-13 h-12 w-12 mx-auto text-center inline-flex items-center justify-center rounded-full text-white bg-gradient-to-r from-[#2dce89] to-[#2dcecc]"
@@ -184,10 +170,7 @@
                     <span class="text-0.8125 text-white font-semibold mt-2.5">Reports</span>
                   </a>
 
-                  <a
-                    href="#!"
-                    class="flex flex-col w-2/6 py-3 text-center items-center content-center"
-                  >
+                  <a class="flex flex-col w-2/6 py-3 text-center items-center content-center">
                     <div class="flex text-center items-center content-center h-13 w-13">
                       <div
                         class="transition-all duration-150 hover:h-13 hover:w-13 h-12 w-12 mx-auto text-center inline-flex items-center justify-center rounded-full text-white bg-gradient-to-r from-[#8965e0] to-[#bc65e0]"
@@ -200,10 +183,7 @@
                     <span class="text-0.8125 text-white font-semibold mt-3">Maps</span>
                   </a>
 
-                  <a
-                    href="#!"
-                    class="flex flex-col w-2/6 py-3 text-center items-center content-center"
-                  >
+                  <a class="flex flex-col w-2/6 py-3 text-center items-center content-center">
                     <div class="flex text-center items-center content-center h-13 w-13">
                       <div
                         class="transition-all duration-150 hover:h-13 hover:w-13 h-12 w-12 mx-auto text-center inline-flex items-center justify-center rounded-full text-white bg-gradient-to-r from-[#ffd600] to-[#beff00]"
@@ -235,7 +215,6 @@
                 <h4>
                   <el-link
                     :underline="false"
-                    href="#index"
                     class="text-sm font-semibold text-slate-50 hover:text-slate-300 pt-1"
                     >Admin</el-link
                   >

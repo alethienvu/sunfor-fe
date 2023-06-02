@@ -13,7 +13,6 @@
           <div>
             <el-link
               :underline="false"
-              href="#!"
               class="text-sm !text-slate-50 hover:text-white font-semibold"
             >
               {{ parentPath }}

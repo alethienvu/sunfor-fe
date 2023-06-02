@@ -1,9 +1,10 @@
 import useStore from 'store';
-import { createRouter, createWebHistory, type Router } from 'vue-router';
+import { createRouter, createWebHashHistory, type Router } from 'vue-router';
 import routes from './routes';
-
+// using hash history for display githubpages
+// https://router.vuejs.org/guide/essentials/history-mode.html
 const router: Router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes
 });
 router.beforeEach((to, from, next) => {

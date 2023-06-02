@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { defineConfig } from 'vite';
 import packageJson from './package.json';
+import { VitePWA } from 'vite-plugin-pwa';
 const { visualizer } = require('rollup-plugin-visualizer');
 
 const resolvePath = (dir: string) => {
@@ -10,10 +11,25 @@ const resolvePath = (dir: string) => {
 };
 
 export default defineConfig({
-  // This base to deploy githubPage only 
+  // This base to deploy githubPage only
   // (https://vitejs.dev/guide/static-deploy.html#github-pages)
   base: `/${packageJson.name}/`,
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    VitePWA({
+      srcDir: "src",
+      filename: "service-worker.js",
+      strategies: "injectManifest",
+      injectRegister: false,
+      devOptions: {
+        enabled: true
+      },
+      manifest: false,
+      injectManifest: {
+        injectionPoint: undefined,
+      },
+    })
+  ],
   resolve: {
     alias: {
       assets: resolvePath('assets'),

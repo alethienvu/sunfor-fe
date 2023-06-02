@@ -12,7 +12,7 @@ import './index.css';
 import 'element-plus/dist/index.css';
 import router from './router';
 import setupInterceptors from './services/setupInterceptors';
-import './registerServiceWorker';
+import setupServiceWorker from './setupServiceWorker';
 // create new app instance
 const createNewApp = () => {
   const app = createApp({
@@ -27,6 +27,8 @@ const createNewApp = () => {
   app.use(AppComponents);
   app.use(createPinia());
   setupInterceptors();
+  // register service worker
+  setupServiceWorker();
   app.mount('#app');
   app.config.performance = true;
 };

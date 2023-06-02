@@ -14,8 +14,8 @@
     "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["esnext", "dom"],
-    "types": ["vite/client", "node", "element-plus/global"],
+    "lib": ["esnext", "dom",  "WebWorker"],
+    "types": ["vite/client", "node", "element-plus/global", "vite-plugin-pwa/client"],
     "typeRoots": ["./node_modules/@types", "node_modules/@types","node_modules/@element-plus/dist/types"],
     "baseUrl": ".",
     "paths": {
@@ -33,5 +33,5 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules", "node_modules/**", "src/**/*.vue.js"]
+  "exclude": ["node_modules", "node_modules/**", "src/**/*.vue.js","**/sw.js"]
 }
