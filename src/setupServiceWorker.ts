@@ -4,7 +4,7 @@ import { urlB64ToUint8Array } from './utils';
 const setup = async () => {
   if ('serviceWorker' in navigator && 'PushManager' in window) {
     navigator.serviceWorker.register(
-      import.meta.env.MODE === 'production' ? 'src/service-worker.js' : 'src/dev-sw.js'
+      import.meta.env.MODE === 'production' ? '/service-worker.js' : 'src/dev-sw.js'
     );
     const result = await Notification.requestPermission();
     if (result === 'denied') {
