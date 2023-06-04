@@ -4,7 +4,9 @@ import { urlB64ToUint8Array } from './utils';
 const setup = async () => {
   if ('serviceWorker' in navigator && 'PushManager' in window) {
     navigator.serviceWorker.register(
-      import.meta.env.MODE === 'production' ? '/service-worker.js' : 'src/dev-sw.js'
+      // in production environment the service-worker.js file is in the root directory
+      // In the development environment, the sv file is located in the src . directory
+      import.meta.env.MODE === 'production' ? '/service-worker.js' : 'src/service-worker.js'
     );
     const result = await Notification.requestPermission();
     if (result === 'denied') {
