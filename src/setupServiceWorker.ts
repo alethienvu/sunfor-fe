@@ -13,15 +13,11 @@ const setup = async () => {
       console.error('The user explicitly denied the permission request.');
       return;
     }
-    if (result === 'granted') {
-      console.info('The user accepted the permission request.');
-    }
     const registrations = await navigator.serviceWorker.getRegistrations();
     const registration = registrations[0];
     if (registration) {
       const subscribed = await registration.pushManager.getSubscription();
       if (subscribed) {
-        console.log('🚀🚀🚀 ~ User is already subscribed...');
         return;
       }
 

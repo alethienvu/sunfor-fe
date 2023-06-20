@@ -22,24 +22,22 @@ const setup = () => {
       return res;
     },
     async (err) => {
-      console.log('🚀🚀🚀 ~ file: setupInterceptors.ts:24 ~ err:', err.response);
+      console.error(err.response);
       const globalStore = useGlobalStore();
       globalStore.actLoading(false);
-      globalStore.actAlert({ type: AlertType.error, message: err.response.data.message });
+      // globalStore.actAlert({ type: AlertType.error, message: err.response?.data?.message || err.message });
       const originalConfig = err.config;
       if (originalConfig.url !== '/auth/login' && err.response) {
         // Access Token was expired
-        if (err.response.status === 401 && !originalConfig._retry) {
-          originalConfig._retry = true;
-
+        if (err.response.status === 401) {
           try {
             const rs = await axiosInstance.post('/auth/refresh-access-token', {
               refreshToken: TokenService.getLocalRefreshToken()
             });
-            const { accessToken } = rs.data;
-            const store = useStore;
-            store.auth.refreshToken(accessToken);
-            TokenService.updateLocalAccessToken(accessToken);
+            const { accessToken, refreshToken } = rs.data;
+            const store = useStore();
+            TokenService.updateLocalToken(accessToken, refreshToken);
+            store.auth.actRefreshToken(accessToken);
             return axiosInstance(originalConfig);
           } catch (_error) {
             return Promise.reject(_error);

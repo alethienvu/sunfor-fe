@@ -6,7 +6,7 @@
       class="main-content flex flex-col flex-1 w-full overflow-auto"
       :class="`${!isSBPin ? ' ml-17 ' : 'ml-62.5 cursor-pointer lg:cursor-default'}`"
     >
-      <navigation />
+      <Navigation />
       <div
         class="w-full h-38 border-none"
         :class="{
@@ -58,15 +58,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import useStore from 'store';
 import { HomeFilled } from '@element-plus/icons-vue';
 import { useRoute } from 'vue-router';
+import AuthService from '../services/auth.service';
+import tokenService from '../services/token.service';
+import Navigation from '../components/Navigation/DefaultNav.vue';
 
 export default defineComponent({
   name: 'Layout',
   components: {
-    HomeFilled
+    HomeFilled,
+    Navigation
   },
 
   setup() {
@@ -74,14 +78,28 @@ export default defineComponent({
     const store = useStore();
     const isSBPin = computed<boolean>(() => store.dashboard.isSBPin);
     const loading = computed(() => store.global.loading);
-
     const setIsSBPin = (b: boolean) => store.dashboard.setIsSBPin(b);
+    const user = ref({});
+    const fetch = async () => {
+      AuthService.getUserInfo().then((result) => {
+        user.value = result;
+        const oldUser = tokenService.getUser();
+        const updatedUserInfo = { ...result, ...oldUser };
+        tokenService.setUser(updatedUserInfo);
+      });
+      AuthService.getAvatar().then((res) => {
+        console.log('🚀🚀🚀 ~ file: default-layout.vue:91 ~ AuthService.getAvatar ~ res:', res);
+        store.dashboard.setAvatar(res);
+      });
+    };
+    fetch();
     return {
       isSBPin,
       loading,
       setIsSBPin,
       route,
-      store
+      store,
+      user
     };
   },
   beforeMount() {
