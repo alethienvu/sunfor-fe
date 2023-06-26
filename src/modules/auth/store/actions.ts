@@ -35,10 +35,15 @@ export const useActions = defineStore('auth.actions', () => {
     state.user = { ...state.user, accessToken };
   };
 
+  const setUser = (user: any) => {
+    state.user = user;
+  };
+
   return {
     actLogin,
     actLogout,
     actRegister,
-    actRefreshToken
+    actRefreshToken,
+    setUser
   };
 });

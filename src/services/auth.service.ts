@@ -2,7 +2,7 @@ import type { IForgotPassDto, ILoginDto, IRegisterDto } from 'src/types/user';
 import api from './api';
 import TokenService from './token.service';
 import { removeLocal, saveLocal } from '../utils/localStorage';
-import { arrayBufferToBase64, base64ToArrayBuffer } from '../utils/index';
+import { arrayBufferToBase64 } from '../utils/index';
 class AuthService {
   login(userDto: ILoginDto) {
     return api
@@ -62,13 +62,10 @@ class AuthService {
           const avatarBlob = new Blob([res.data], { type: 'image/jpeg' });
           const userAvatarLink = URL.createObjectURL(avatarBlob);
           return userAvatarLink;
-        } else {
-          return new URL('@/assets/images/ltv_logo.png', import.meta.url).href;
         }
       })
       .catch((_e) => {
         removeLocal('avatar');
-        return new URL('@/assets/images/ltv_logo.png', import.meta.url).href;
       });
   }
 }

@@ -27,18 +27,6 @@
                 <BreadCrumb :parentPath="route.meta.parentPath" :title="route.meta.title" />
               </div>
             </div>
-            <div class="w-1/2 text-right pt-px pr-px">
-              <el-button
-                size="small"
-                class="w-11.25 h-7 rounded font-semibold text-indigo-410 bg-white border-white hover:text-black hover:bg-white active:bg-slate-100 tracking-wide"
-                >New</el-button
-              >
-              <el-button
-                size="small"
-                class="w-14 h-7 rounded font-semibold text-indigo-410 bg-white border-white hover:text-black hover:bg-white active:bg-slate-100 tracking-wide"
-                >Filters</el-button
-              >
-            </div>
           </div>
         </div>
 
@@ -64,13 +52,12 @@ import { HomeFilled } from '@element-plus/icons-vue';
 import { useRoute } from 'vue-router';
 import AuthService from '../services/auth.service';
 import tokenService from '../services/token.service';
-import Navigation from '../components/Navigation/DefaultNav.vue';
-
+import { defineAsyncComponent } from 'vue';
 export default defineComponent({
   name: 'Layout',
   components: {
     HomeFilled,
-    Navigation
+    Navigation: defineAsyncComponent(() => import('../components/Navigation/DefaultNav.vue'))
   },
 
   setup() {
@@ -85,11 +72,11 @@ export default defineComponent({
         user.value = result;
         const oldUser = tokenService.getUser();
         const updatedUserInfo = { ...result, ...oldUser };
+        store.auth.setUser(updatedUserInfo);
         tokenService.setUser(updatedUserInfo);
       });
       AuthService.getAvatar().then((res) => {
-        console.log('🚀🚀🚀 ~ file: default-layout.vue:91 ~ AuthService.getAvatar ~ res:', res);
-        store.dashboard.setAvatar(res);
+        store.dashboard.setAvatar(res || null);
       });
     };
     fetch();

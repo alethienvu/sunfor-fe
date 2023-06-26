@@ -216,7 +216,7 @@
                   <el-link
                     :underline="false"
                     class="text-sm font-semibold text-slate-50 hover:text-slate-300 pt-1"
-                    >Admin</el-link
+                    >{{ userInfo?.last_name || 'Admin' }}</el-link
                   >
                 </h4>
               </div>
@@ -308,9 +308,9 @@ export default defineComponent({
     const route: any = useRoute();
     const store = useStore();
 
-    const Logo_Url = store.dashboard.getUserAvatar;
+    const Logo_Url = computed(() => store.dashboard.getUserAvatar);
     const John_Snow_Url = new URL('@/assets/images/John_Snow.png', import.meta.url).href;
-
+    const userInfo = computed(() => store.auth.getuser);
     const isPagesMenuOpen = ref(false);
     const isSideMenuOpen = ref(false);
     const isSearchOpen = ref(true);
@@ -351,7 +351,8 @@ export default defineComponent({
       togglePagesMenu,
       closeSideMenu,
       Logo_Url,
-      John_Snow_Url
+      John_Snow_Url,
+      userInfo
     };
   }
 });
