@@ -4,22 +4,20 @@ import { urlB64ToUint8Array } from './utils';
 const setup = async () => {
   if ('serviceWorker' in navigator && 'PushManager' in window) {
     navigator.serviceWorker.register(
-      import.meta.env.MODE === 'production' ? '/service-worker.js' : 'src/dev-sw.js'
+      // in production environment the service-worker.js file is in the root directory
+      // In the development environment, the sv file is located in the src . directory
+      import.meta.env.MODE === 'production' ? '/service-worker.js' : 'src/service-worker.js'
     );
     const result = await Notification.requestPermission();
     if (result === 'denied') {
       console.error('The user explicitly denied the permission request.');
       return;
     }
-    if (result === 'granted') {
-      console.info('The user accepted the permission request.');
-    }
     const registrations = await navigator.serviceWorker.getRegistrations();
     const registration = registrations[0];
     if (registration) {
       const subscribed = await registration.pushManager.getSubscription();
       if (subscribed) {
-        console.log('🚀🚀🚀 ~ User is already subscribed...');
         return;
       }
 

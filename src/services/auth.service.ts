@@ -1,7 +1,8 @@
 import type { IForgotPassDto, ILoginDto, IRegisterDto } from 'src/types/user';
 import api from './api';
 import TokenService from './token.service';
-
+import { removeLocal, saveLocal } from '../utils/localStorage';
+import { arrayBufferToBase64 } from '../utils/index';
 class AuthService {
   login(userDto: ILoginDto) {
     return api
@@ -38,6 +39,33 @@ class AuthService {
       })
       .catch((_e) => {
         console.log(_e);
+      });
+  }
+
+  async getUserInfo() {
+    return await api
+      .get('auth/current')
+      .then((response) => {
+        return response.data;
+      })
+      .catch((_e) => {
+        console.log(_e);
+      });
+  }
+
+  async getAvatar() {
+    return await api
+      .get('user/avatar', { responseType: 'arraybuffer' })
+      .then((res) => {
+        if (res.data) {
+          saveLocal('avatar', arrayBufferToBase64(res.data));
+          const avatarBlob = new Blob([res.data], { type: 'image/jpeg' });
+          const userAvatarLink = URL.createObjectURL(avatarBlob);
+          return userAvatarLink;
+        }
+      })
+      .catch((_e) => {
+        removeLocal('avatar');
       });
   }
 }

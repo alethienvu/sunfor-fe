@@ -28,11 +28,16 @@ export const useActions = defineStore('dashboard.actions', () => {
     }
   };
 
+  const setAvatar = (value: string) => {
+    state.userAvatar = value;
+  };
+
   return {
     showWelcomeText,
     setWelcomeText,
     setIsSBPin,
     setIsSBOpen,
-    toggleMenu
+    toggleMenu,
+    setAvatar
   };
 });

@@ -12,9 +12,10 @@ class TokenService {
     return user?.accessToken;
   }
 
-  updateLocalAccessToken(token: string) {
+  updateLocalToken(accessToken: string, refreshToken: string) {
     const user = readLocal(LOGIN_DATA_KEY);
-    user.accessToken = token;
+    user.accessToken = accessToken;
+    user.refreshToken = refreshToken;
     saveLocal(LOGIN_DATA_KEY, user);
   }
 

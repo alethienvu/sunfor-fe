@@ -7,7 +7,8 @@ export const useState = defineStore({
     return {
       welcomeText: 'Welcome to Dashboard! ...',
       isSBPin: true,
-      isSBOpen: true
+      isSBOpen: true,
+      userAvatar: ''
     };
   }
 });

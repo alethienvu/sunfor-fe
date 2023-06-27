@@ -7,7 +7,6 @@ import router from 'router/index';
 
 export const useActions = defineStore('auth.actions', () => {
   const state = useState();
-
   const actLogin = async (userDto: ILoginDto) => {
     const loginUser = await AuthService.login(userDto);
     if (!loginUser) {
@@ -33,13 +32,18 @@ export const useActions = defineStore('auth.actions', () => {
 
   const actRefreshToken = (accessToken: string) => {
     state.isAuthenticated = true;
-    state.user = { ...state.user, accessToken: accessToken };
+    state.user = { ...state.user, accessToken };
+  };
+
+  const setUser = (user: any) => {
+    state.user = user;
   };
 
   return {
     actLogin,
     actLogout,
     actRegister,
-    actRefreshToken
+    actRefreshToken,
+    setUser
   };
 });

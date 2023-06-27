@@ -216,7 +216,7 @@
                   <el-link
                     :underline="false"
                     class="text-sm font-semibold text-slate-50 hover:text-slate-300 pt-1"
-                    >Admin</el-link
+                    >{{ userInfo?.last_name || 'Admin' }}</el-link
                   >
                 </h4>
               </div>
@@ -290,8 +290,6 @@ import {
 import { MenuIcon, MenuAlt1Icon, SearchCircleIcon } from '@heroicons/vue/outline';
 import useStore from 'store';
 import { useRoute } from 'vue-router';
-import Logo_Url from '@/assets/images/ltv_logo.png';
-import John_Snow_Url from '@/assets/images/John_Snow.png';
 export default defineComponent({
   name: 'DefaultNav',
   components: {
@@ -309,6 +307,10 @@ export default defineComponent({
   setup() {
     const route: any = useRoute();
     const store = useStore();
+
+    const Logo_Url = computed(() => store.dashboard.getUserAvatar);
+    const John_Snow_Url = new URL('@/assets/images/John_Snow.png', import.meta.url).href;
+    const userInfo = computed(() => store.auth.getuser);
     const isPagesMenuOpen = ref(false);
     const isSideMenuOpen = ref(false);
     const isSearchOpen = ref(true);
@@ -349,7 +351,8 @@ export default defineComponent({
       togglePagesMenu,
       closeSideMenu,
       Logo_Url,
-      John_Snow_Url
+      John_Snow_Url,
+      userInfo
     };
   }
 });

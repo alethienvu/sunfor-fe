@@ -6,7 +6,7 @@
       class="main-content flex flex-col flex-1 w-full overflow-auto"
       :class="`${!isSBPin ? ' ml-17 ' : 'ml-62.5 cursor-pointer lg:cursor-default'}`"
     >
-      <navigation />
+      <Navigation />
       <div
         class="w-full h-38 border-none"
         :class="{
@@ -27,18 +27,6 @@
                 <BreadCrumb :parentPath="route.meta.parentPath" :title="route.meta.title" />
               </div>
             </div>
-            <div class="w-1/2 text-right pt-px pr-px">
-              <el-button
-                size="small"
-                class="w-11.25 h-7 rounded font-semibold text-indigo-410 bg-white border-white hover:text-black hover:bg-white active:bg-slate-100 tracking-wide"
-                >New</el-button
-              >
-              <el-button
-                size="small"
-                class="w-14 h-7 rounded font-semibold text-indigo-410 bg-white border-white hover:text-black hover:bg-white active:bg-slate-100 tracking-wide"
-                >Filters</el-button
-              >
-            </div>
           </div>
         </div>
 
@@ -58,15 +46,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import useStore from 'store';
 import { HomeFilled } from '@element-plus/icons-vue';
 import { useRoute } from 'vue-router';
-
+import AuthService from '../services/auth.service';
+import tokenService from '../services/token.service';
+import { defineAsyncComponent } from 'vue';
 export default defineComponent({
   name: 'Layout',
   components: {
-    HomeFilled
+    HomeFilled,
+    Navigation: defineAsyncComponent(() => import('../components/Navigation/DefaultNav.vue'))
   },
 
   setup() {
@@ -74,14 +65,28 @@ export default defineComponent({
     const store = useStore();
     const isSBPin = computed<boolean>(() => store.dashboard.isSBPin);
     const loading = computed(() => store.global.loading);
-
     const setIsSBPin = (b: boolean) => store.dashboard.setIsSBPin(b);
+    const user = ref({});
+    const fetch = async () => {
+      AuthService.getUserInfo().then((result) => {
+        user.value = result;
+        const oldUser = tokenService.getUser();
+        const updatedUserInfo = { ...result, ...oldUser };
+        store.auth.setUser(updatedUserInfo);
+        tokenService.setUser(updatedUserInfo);
+      });
+      AuthService.getAvatar().then((res) => {
+        store.dashboard.setAvatar(res || null);
+      });
+    };
+    fetch();
     return {
       isSBPin,
       loading,
       setIsSBPin,
       route,
-      store
+      store,
+      user
     };
   },
   beforeMount() {
