@@ -20,7 +20,7 @@
           </el-link>
 
           <div class="flex-auto">
-            <h5 class="mb-2">Argon Design System</h5>
+            <h5 class="mb-2">SUNFOR Design System</h5>
             <el-progress :percentage="59" :show-text="false" :color="customColors" />
           </div>
         </div>
