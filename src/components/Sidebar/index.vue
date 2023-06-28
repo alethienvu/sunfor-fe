@@ -13,10 +13,11 @@
         <router-link
           v-if="(isSBOpen && !isSBPin) || isSBPin"
           :class="{ 'opacity-0': !isSBOpen && !isSBPin }"
-          class="transition-opacity duration-300 opacity-1 p-6 block"
+          class="transition-opacity duration-300 opacity-1 p-6 flex justify-center items-center"
           :to="{ name: 'Dashboard' }"
         >
-          <img src="@/assets/images/blue.png" class="max-h-8 max-w-full align-middle" alt="..." />
+          <img src="@/assets/images/sonic.svg" class="max-h-16 max-w-full align-middle mr-2" alt="..." />
+          <h1>SUNFOR</h1>
         </router-link>
         <div class="ml-auto">
           <div class="lg:col-span-10 xl:col-span-10 flex">

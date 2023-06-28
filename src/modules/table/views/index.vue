@@ -71,7 +71,7 @@ export default defineComponent({
     const tableData: Project[] = [
       {
         projectLogoPath: Logo_Url,
-        project: 'Argon Design System',
+        project: 'SUNFOR Design System',
         budget: '2500 ',
         status: 'pending',
         users: usersData,
@@ -79,7 +79,7 @@ export default defineComponent({
       },
       {
         projectLogoPath: Logo_Url,
-        project: 'Argon Design System',
+        project: 'SUNFOR Design System',
         budget: '4000 ',
         status: 'completed',
         users: usersData,
@@ -87,7 +87,7 @@ export default defineComponent({
       },
       {
         projectLogoPath: Logo_Url,
-        project: 'Argon',
+        project: 'SUNFOR',
         budget: '2500 ',
         status: 'delayed',
         users: usersData,
@@ -95,7 +95,7 @@ export default defineComponent({
       },
       {
         projectLogoPath: Logo_Url,
-        project: 'Argon Design',
+        project: 'SUNFOR Design',
         budget: '3300 ',
         status: 'on schedule',
         users: usersData,
@@ -103,7 +103,7 @@ export default defineComponent({
       },
       {
         projectLogoPath: Logo_Url,
-        project: 'Argon System',
+        project: 'SUNFOR System',
         budget: '3000 ',
         status: 'completed',
         users: usersData,

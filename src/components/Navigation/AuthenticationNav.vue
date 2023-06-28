@@ -2,10 +2,11 @@
   <div
     class="container xl:max-w-5.75xl lg:max-w-4.5xl md:max-w-2.625xl sm:max-w-0.25xl w-full lg:h-14 h-10 flex flex-nowrap basis-auto justify-between items-center mx-auto lg:px-3.75"
   >
-    <div class="mr-9 pt-1.5">
-      <a class="inline-block py-2.5 whitespace-nowrap w-[101.45px]">
-        <img class="h-7.5" alt="..." src="@/assets/images/white.png" />
+    <div class="mr-9 pt-1.5 flex justify-center items-center">
+      <a class="inline-block py-2.5 whitespace-nowrap w-[100px]">
+        <img class="h-full" alt="..." src="@/assets/images/sonic.svg" />
       </a>
+      <h1 class="text-white">SUNFOR</h1>
     </div>
     <div class="relative inline-block lg:hidden w-11">
       <div class="flex items-center">
@@ -15,7 +16,7 @@
             <el-dropdown-menu>
               <el-dropdown-item>
                 <a class="inline-block whitespace-nowrap w-[121.75px] pb-2.5">
-                  <img class="h-9" alt="..." src="@/assets/images/blue.png" />
+                  <img class="h-9" alt="..." src="@/assets/images/sonic.svg" />
                 </a>
                 <div class="absolute right-0 top-1.5">
                   <XIcon class="w-6 h-6 text-default hover:text-default active:text-default" />
